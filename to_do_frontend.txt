@@ -1,0 +1,76 @@
+----- GAME -----
+- Make GameBoards
+  :) - level 1
+  - level 2
+  - level 3
+  - level 4
+  - level 5
+
+- num lifes listed below gameboard represented as gif of kong
+- top of game board needs to list out:
+currentscore, highest score, and current level
+
+- :) Start Button that will launch the game
+- on lose, stop all functions
+
+----- Kong -----
+
+- :) Build player controls
+- :) import proper sprites
+
+
+----- GHOST -----
+- :) need proper sprites for ghost
+- need to finish logic for ghost behaviours
+- map out the strategy pattern (diff tactics
+that the ghost use depending on their "mood")
+
+- :) fix issues where ghost diappear behind bananas
+
+- Create Ghost
+  - Pinky
+    - AI behaviour
+      - Pac-Man location + 2
+      - scatter to upper left corner [0, 0]
+  - Inky
+    - AI behaviour
+      - Blinky distance from Pac-Man * 2
+      - scatter to lower right corner [28, 28]
+  - Clyde
+    - AI behaviour
+      - either attacks directly but if Pac-Man distance < 8, runs to corner
+      - scatter to lower left corner [28, 0]
+  - Blinky
+    - AI behaviour
+      - Pac-Man location directly
+      - scatter to upper right corner [0, 28]
+  - Create Moods
+    - Scared: Random movements
+    - Scatter: return to corners, hten reenters chase mode
+    - Chase: Chases for 20 sec the first and second time, unless lvl 1, 3rd chase is 20 sec
+      then balloons to 1033 sec on lvl 2-4, if ghost are scared reset the timer to 0
+
+----- Splash -----
+
+- users
+  - login
+    - module
+    - saves prev highest score into local storage
+    - profile img
+    - username
+    - password
+  - logout
+    - some icon (randomly asigned like github) top right to logout
+  - header
+    - before log in:
+      - pacman logo top left
+      - login/demo top right
+    - after log in:
+      - same logo
+      - prof icon displayed top right in a circle when clicked drop down appears
+      with prev high score, and ranking on the "WORLD LEADERBOARD", as well as
+      username and the option to logout
+  - footer
+    - links to github, linkedin, portfolio, copyright, maybe list technologies used
+    or lik ein read me from last project, list out the icons for the tech used in the
+    project and make them clickable to the documentation for those icons

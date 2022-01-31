@@ -1,0 +1,131 @@
+#canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+
+body{
+    background-color: #000;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.content{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.content div{
+    height: 50%;
+    width: 50%;
+}
+
+#welcome{
+    font-size: 60px;
+    margin-bottom: 15px;
+    animation: Slide_Up 1.4s ease;
+
+}
+
+.words{
+    font-size: 30px;
+    animation: Slide_Left 1.4s ease;
+
+}
+
+.buttons{
+    margin-top: 15px;
+    font-size: 22px;
+    border-radius: 50px;
+    padding: 10px;
+    color: white;
+    background-color: black;
+    border: none;
+    outline: none;
+    margin-right: 15px;
+    animation: Slide_Right 1.4s ease;
+
+}
+
+.buttons:hover{
+    color: black;
+    background-color: white;
+}
+
+
+#login{
+    margin: 15px;
+    font-size: 16px;
+ }
+
+ #signup{
+    font-size: 16px;
+ }
+
+@keyframes Slide_Up {
+    0%{
+        transform: translateY(100vh);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+@keyframes Slide_Left {
+    0%{
+        transform: translateX(100vw);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+@keyframes Run_Left {
+    0%{transform: translate(80vw, 35vh) scaleX(-1)}
+    100%{transform: translate(-80vw, 35vh)}
+}
+
+@keyframes Slide_Right {
+    0%{
+        transform: translateX(-100vh);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+@keyframes Go_Kong {
+    0%{transform: translate(0vh, -10vh)}
+    25%{transform: translate(30vh, -10vh) scaleX(-1)}
+    50%{transform: translate(0vh, -10vh) scaleX(-1)}
+    75%{transform: translate(-30vh, -10vh)}
+    100%{transform: translate(0vh, -10vh)}
+}
+
+@keyframes Go_Ghost{
+    0%{transform: translate(80vw, 35vh)}
+    50%{transform: translate(-80vw, 35vh)}
+    100%{transform: translate(80vw, 35vh)}
+}

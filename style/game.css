@@ -1,0 +1,188 @@
+
+  body{
+    box-sizing: border-box;
+    background-color: #181A25;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .game-header{
+    display: flex;
+    justify-content: space-around;
+    width: 784px;
+    -webkit-font-smoothing : none;
+  }
+
+  h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    color: white;
+    margin-top: 50px;
+  }
+
+  .grid {
+    background-image: url('/pacman3.0/images/dirt.jpeg');
+    display: grid;
+    grid-template-columns: repeat(28, 28px);
+    grid-template-rows: repeat(28, 28px);
+    margin-left: auto;
+    margin-right: auto;
+    width: 784px;
+    height: 784px;
+    z-index: -2;
+    border: 1px solid rgba(14, 60,30, 0.9);
+  }
+
+  .grid div {
+    width: 28px;
+    height: 28px;
+  }
+
+  .pac-dot {
+    background-image: url('../images/banana.gif');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    z-index: 1;
+
+  }
+
+  .blinky {
+    background-image: url('../images/blinky.png');
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+
+  }
+
+  .pinky {
+    background-image: url('../images/pinky.png');
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    position: relative;
+
+  }
+
+  .inky {
+    background-image: url('../images/inky.png');
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+
+  }
+
+  .clyde {
+    background-image: url('../images/clyde.png');
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+
+  }
+
+  .pac-man-left {
+    background-image: url('../images/perfectKong.gif');
+    border-radius: 10px;
+    transform: scaleX(-1);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+
+  }
+
+  .pac-man-right {
+    background-image: url('../images/perfectKong.gif');
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+
+  }
+
+  .pac-man-up {
+    background-image: url('../images/perfectKong.gif');
+    border-radius: 10px;
+    transform: rotate(270deg);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+
+  }
+
+  .pac-man-down {
+    background-image: url('../images/perfectKong.gif');
+    border-radius: 10px;
+    transform: rotate(90deg);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+
+  }
+
+  .scared-ghost {
+    background-image: url('../images/scared-ghost.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+
+  }
+
+  .container {
+    margin-top: -5px;
+    border: red, 10px, solid;
+  }
+
+  .wall {
+    background-image: url('../images/wall.jpeg');
+  }
+
+
+
+  .power-pellet {
+    background-image: url('../images/bunch.png');
+    z-index: 1;
+    align-self: center;
+    justify-self: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+}
+
+#extra-lives{
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#start-wrapper{
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#start-button {
+  padding: 10px;
+  font-size: 16px;
+  width: 400px;
+  margin-top: 50px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background-color: black;
+}
+
+#start-button:hover {
+  font-family: sans-serif;
+  background-color: blue;
+}
