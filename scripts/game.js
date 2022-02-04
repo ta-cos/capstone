@@ -66,9 +66,10 @@ class Game {
             }
         }
         function startGame() {
-            // clyde.movementAI();
-            blinky.movementAI();
             pinky.movementAI();
+            inky.movementAI();
+            blinky.movementAI();
+            clyde.movementAI();
             document.addEventListener('keyup', pacman.movePacman);
             const checkWinId = setInterval(game.checkForWin, 100)
             const gameOverId = setInterval(game.checkForGameOver, 100)
@@ -91,6 +92,8 @@ class Game {
             // ghosts.forEach(ghost => clearInterval(ghost.timerId))
             clearInterval(blinky.timerId)
             clearInterval(pinky.timerId)
+            clearInterval(clyde.timerId)
+            clearInterval(inky.timerId)
 
             scoreDisplay.innerHTML = 'YOU LOSE!'
             grid.remove()
@@ -450,6 +453,7 @@ class Pinky extends Ghost {
             let currentLocation = [pinky.currentX, pinky.currentY]
             let targetLocation = pinky.findTarget()
             let path = pinky.bfs(currentLocation, targetLocation)
+            console.log(path)
             let nextMove = path[1]
             game.squares[pinky.currentX][pinky.currentY].classList.remove(pinky.name)
             game.squares[pinky.currentX][pinky.currentY].classList.remove('ghost', 'scared-ghost')
@@ -461,6 +465,7 @@ class Pinky extends Ghost {
     }
 
 }
+
 class Clyde extends Ghost {
     constructor(name, currentX, currentY, speed) {
         super(name, currentX, currentY, speed)
@@ -488,20 +493,131 @@ class Clyde extends Ghost {
             // }
         }, this.speed)
     }
+
+    sayHello() {
+        console.log('hello')
+    }
+}
+
+class Inky extends Ghost {
+    constructor(name, currentX, currentY, speed) {
+        super(name, currentX, currentY, speed)
+        this.isScared = false
+        this.timerId = null;
+    }
+
+    findNeighbors(start) {
+        let row = start[0]
+        let col = start[1]
+
+        let neighbors = []
+        if (game.isGhostMovementAllowed([row - 1], [col])) {
+            neighbors.push([row - 1, col])
+        }
+        if (game.isGhostMovementAllowed([row + 1], [col])) {
+            neighbors.push([row + 1, col])
+        }
+        if (game.isGhostMovementAllowed([row], [col - 1])) {
+            neighbors.push([row, col - 1])
+        }
+        if (game.isGhostMovementAllowed([row], [col + 1])) {
+            neighbors.push([row, col + 1])
+        }
+        return neighbors;
+    }
+
+    buildPath(traversalTree, target) {
+        let path = [target];
+        let parent = traversalTree[target];
+        while (parent) {
+            path.push(parent);
+            parent = traversalTree[parent];
+        }
+        return path.reverse()
+    }
+
+    bfs(start, target) {
+        let traversalTree = [];
+        let visited = new Set;
+        let queue = [];
+        queue.push(start)
+        while (queue.length) {
+            let current = queue.shift();
+            visited.add(current.toString());
+            if (current.toString() === target.toString()) return inky.buildPath(traversalTree, target)
+            for (let neighbor of inky.findNeighbors(current, matrix)) {
+                if (!visited.has(neighbor.toString())) {
+                    traversalTree[neighbor] = current;
+                    queue.push(neighbor);
+                }
+            }
+        }
+    }
+
+    findTarget() {
+        let targetLocation
+        if (inky.currentX === pacman.currentX && inky.currentY - 2 === pacman.currentY || inky.currentY - 1 === pacman.currentY)
+            targetLocation = [pacman.currentX, pacman.currentY]
+        else if (inky.currentX === pacman.currentX && inky.currentY + 2 === pacman.currentY || inky.currentY + 1 === pacman.currentY)
+            targetLocation = [pacman.currentX, pacman.currentY]
+
+        else if (inky.currentY === pacman.currentY && inky.currentX - 2 === pacman.currentX || inky.currentX - 1 === pacman.currentY)
+            targetLocation = [pacman.currentX, pacman.currentY]
+
+        else if (inky.currentY === pacman.currentY && inky.currentX + 2 === pacman.currentX || inky.currentX + 1 === pacman.currentY)
+            targetLocation = [pacman.currentX, pacman.currentY]
+
+        else if (pacman.direction === 'west' && game.isGhostMovementAllowed(pacman.currentX, pacman.currentY - 2)
+            && pacman.currentY > 0) {
+            targetLocation = [pacman.currentX, pacman.currentY - 2]
+        }
+        else if (pacman.direction === 'south' && game.isGhostMovementAllowed(pacman.currentX + 2, pacman.currentY)
+            && pacman.currentX > 0) {
+            targetLocation = [pacman.currentX + 2, pacman.currentY]
+        }
+        else if (pacman.direction === 'north' && game.isGhostMovementAllowed(pacman.currentX - 2, pacman.currentY)
+            && pacman.currentX < matrix.length - 1) {
+            targetLocation = [pacman.currentX - 2, pacman.currentY]
+        }
+        else if (pacman.direction === 'east' && game.isGhostMovementAllowed(pacman.currentX, pacman.currentY + 2)
+            && pacman.currentY < matrix.length - 1) {
+            targetLocation = [pacman.currentX, pacman.currentY + 2]
+        }
+        else {
+            targetLocation = [pacman.currentX, pacman.currentY]
+        }
+        return targetLocation
+    }
+
+    movementAI() {
+        const timerId = setInterval(function () {
+            let currentLocation = [inky.currentX, inky.currentY]
+            let targetLocation = inky.findTarget()
+            let path = inky.bfs(currentLocation, targetLocation)
+            let nextMove = path[1]
+            game.squares[inky.currentX][inky.currentY].classList.remove(inky.name)
+            game.squares[inky.currentX][inky.currentY].classList.remove('ghost', 'scared-ghost')
+            inky.currentX = nextMove[0];
+            inky.currentY = nextMove[1];
+            game.squares[inky.currentX][inky.currentY].classList.add(inky.name, 'ghost')
+
+        }, this.speed)
+    }
 }
 
 const game = new Game();
 const pacman = new Pacman(game.squares, game.matrix);
 const blinky = new Blinky('blinky', 12, 12, 400)
-const pinky = new Pinky('pinky', 14, 15, 500)
+const pinky = new Pinky('pinky', 14, 15, 300)
 const clyde = new Clyde('clyde', 14, 12, 300)
-const inky = new Ghost('inky', 12, 15, 300)
+const inky = new Inky('inky', 12, 15, 500)
 
 game.createBoard();
 pacman.createPacman();
 blinky.createGhost();
 pinky.createGhost();
-inky.createGhost();
 clyde.createGhost();
+inky.createGhost();
+
 
 pacman.movePacman = pacman.movePacman.bind(pacman)

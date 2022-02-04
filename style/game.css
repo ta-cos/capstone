@@ -25,7 +25,7 @@
   }
 
   .grid {
-    background-image: url('/pacman3.0/images/dirt.jpeg');
+    background-image: url('../images/dirt.jpeg');
     display: grid;
     grid-template-columns: repeat(28, 28px);
     grid-template-rows: repeat(28, 28px);

@@ -59,10 +59,10 @@ clydeGeometry.setAttribute('position', new THREE.BufferAttribute(clydePosArr, 3)
 
 
 // Materials
-const blinkyMaterial = new THREE.PointsMaterial({ size: 0.008, map: blinky, transparent: true })
-const inkyMaterial = new THREE.PointsMaterial({ size: 0.008, map: inky, transparent: true })
-const pinkyMaterial = new THREE.PointsMaterial({ size: 0.008, map: pinky, transparent: true })
-const clydeMaterial = new THREE.PointsMaterial({ size: 0.008, map: clyde, transparent: true })
+const blinkyMaterial = new THREE.PointsMaterial({ size: 0.02, map: blinky, transparent: true })
+const inkyMaterial = new THREE.PointsMaterial({ size: 0.02, map: inky, transparent: true })
+const pinkyMaterial = new THREE.PointsMaterial({ size: 0.02, map: pinky, transparent: true })
+const clydeMaterial = new THREE.PointsMaterial({ size: 0.02, map: clyde, transparent: true })
 
 
 
